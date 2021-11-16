@@ -1,41 +1,37 @@
-from flask import Flask
-from flask_restful import Resource, Api, reqparse
+from flask import Flask, jsonify, request, send_file, send_from_directory, safe_join, abort
+from flask_cors import CORS
+import os
+from demo import doWork
 
 app = Flask(__name__)
-api = Api(app)
-STUDENTS = {
-  '1': {'name': 'Mark', 'age': 23, 'spec': 'math'},
-  '2': {'name': 'Jane', 'age': 20, 'spec': 'biology'},
-  '3': {'name': 'Peter', 'age': 21, 'spec': 'history'},
-  '4': {'name': 'Kate', 'age': 22, 'spec': 'science'},
-}
+CORS(app)
 
-# @app.route("/")
 
-# def home():
-#     return "Hey hi!"
+# Defining the home page of our site
+
+
+@app.route("/mp3file", methods=['POST'])  # this sets the route to this page
+def filething():
+    # print("random")
+    if request.files:
+        print(request.files['file'])
+        mp3file = request.files['file']
+        path = os.path.join(os.path.dirname(
+            os.path.realpath(__file__)), mp3file.filename)
+        # print("**")
+        # print(path)
+        # print("--")
+        # print(os.path.realpath(__file__))
+        # print("&&")
+        # print(os.path.dirname(os.path.realpath(__file__)))
+        mp3file.save(path)
+        doWork(mp3file.filename)
+
+    path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "FINAL.wav")
+    return send_file(path, as_attachment=True)
+    # return send_from_directory(app.config["CLIENT_REPORTS"], filename=path, as_attachment=True)
+    # return jsonify({"key": "Hello world"})  # some basic inline html
+
 
 if __name__ == "__main__":
-  app.run(debug=True)
-
-parser = reqparse.RequestParser()
-
-class StudentsList(Resource):
-  def get(self):
-    return STUDENTS
-
-  def post(self):
-      parser.add_argument("name")
-      parser.add_argument("age")
-      parser.add_argument("spec")
-      args = parser.parse_args()
-      student_id = int(max(STUDENTS.keys())) + 1
-      student_id = '%i' % student_id
-      STUDENTS[student_id] = {
-        "name": args["name"],
-        "age": args["age"],
-        "spec": args["spec"],
-      }
-      return STUDENTS[student_id], 201
-
-api.add_resource(StudentsList, '/students/')
+    app.run(debug=True)
