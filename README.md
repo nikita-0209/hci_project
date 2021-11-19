@@ -5,6 +5,6 @@
 2. Install the requirements using the following commands.
 ``` pip install requirements.txt```
 3. Open your terminal, and run the following command.
-'''python api.py'''
+```python api.py```
 4. Upload an audio file (accepted format: .wav) to the portal. In case you do not have an audio file, upload the sample file given, ie., ```test.wav```
 5. Once you click on submit, the processed audio file will get downloaded.
