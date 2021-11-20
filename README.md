@@ -14,4 +14,4 @@
 ## Details
 1. Programming Language: Python
 2. Hardware Requirements: Nil
-3. Sor=ftware Requirements: Enlisted in requirements.txt
+3. Software Requirements: Enlisted in requirements.txt
