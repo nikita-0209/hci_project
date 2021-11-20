@@ -10,3 +10,8 @@
 ```python api.py```
 4. Upload an audio file (accepted format: .wav) to the portal. In case you do not have an audio file, upload the sample file given, ie., ```test.wav```
 5. Once you click on submit, the processed audio file  named ```FINAL.wav``` will get downloaded to your system automatically.
+
+## Details
+1. Programming Language: Python
+2. Hardware Requirements: Nil
+3. Sor=ftware Requirements: Enlisted in requirements.txt
